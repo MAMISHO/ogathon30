@@ -23,7 +23,7 @@ export class AppController {
     type: Number,
     description: 'Número inicial para el cálculo de la propagación',
   })
-  getPattern(@Query('n') n): number {
+  getPattern(@Query('n') n): bigint {
     if (isNaN(n)) {
       throw new BadRequestException('El parámetro n debe ser un número');
     }
@@ -31,6 +31,8 @@ export class AppController {
       throw new BadRequestException('No se permiten valores negativos');
     }
 
-    return this.appService.countVirusPropagation(parseInt(n));
+    const result = this.appService.countVirusPropagation(parseInt(n));
+
+    return result;
   }
 }
